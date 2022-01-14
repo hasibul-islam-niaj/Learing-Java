@@ -1,8 +1,5 @@
 package com.hasibul.annotations;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +7,7 @@ import java.util.Map;
 class ValidateEntity{
 
     @NotEmpty(message = "Id should not be Empty")
+    @MaxLength(maxLength = 10)
     public String id;
 
     @NotEmpty(message = "Name should not be empty")
@@ -20,7 +18,7 @@ class ValidateEntity{
         ValidateEntity validateEntity = new ValidateEntity();
 
         validateEntity.id = data.get("id");
-        validateEntity.name = data.get("name");
+//        validateEntity.name = data.get("name");
 
         validationFactory.validate(validateEntity);
         return null;

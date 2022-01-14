@@ -18,20 +18,20 @@ public class ValidationFactory {
         Arrays.stream(fields).forEach(field -> {
             Annotation[] annotations = field.getAnnotations();
 
-            Arrays.stream(annotations).forEach(annotation -> {
+            for (Annotation annotation : annotations){
                 if (annotation.annotationType().toString().contains(NotEmpty.class.getTypeName())) {
+                    NotEmpty notEmpty = (NotEmpty) annotation;
                     try {
-                        System.out.println(field.get(entity));
+                        if (isEmpty((String) field.get(entity))){
+                            System.out.println(notEmpty.message());
+                        }
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
                 }
-            });
+            }
         });
 
         return null;
     }
 }
-
-
-
